@@ -1,0 +1,33 @@
+.social-login {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.social-icon-wrapper {
+  cursor: pointer;
+  margin: 0 10px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.social-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.social-icon-wrapper:hover {
+  background-color: #f1f1f1;
+}
+
+.social-login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-login-button {
+  margin: 0 10px;
+} 

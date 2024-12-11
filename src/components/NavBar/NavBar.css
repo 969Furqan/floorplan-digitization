@@ -1,0 +1,91 @@
+/* Top Navigation */
+.navbar-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.auth-links {
+  display: flex;
+  gap: 20px;
+}
+
+.auth-links .sign-in-btn {
+  color: #fff;
+  background-color: #333;
+  text-decoration: none;
+  padding: 8px 20px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.auth-links .sign-in-btn:hover {
+  background-color: #555;
+}
+
+/* Vertical Navigation */
+.navbar-vertical {
+  position: fixed;
+  top: 60px; /* Below top navbar */
+  left: -240px; /* Start hidden */
+  height: calc(100vh - 60px);
+  width: 240px;
+  background-color: #333;
+  transition: left 0.3s ease;
+  z-index: 999;
+}
+
+.navbar-vertical.open {
+  left: 0;
+}
+
+.nav-links-vertical {
+  list-style: none;
+  padding: 20px;
+  margin: 0;
+}
+
+.nav-links-vertical li {
+  margin-bottom: 10px;
+}
+
+.nav-links-vertical a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.nav-links-vertical a:hover {
+  background-color: #555;
+}
+
+/* Main content adjustment */
+body {
+  margin-top: 60px; /* Space for top navbar */
+  transition: margin-left 0.3s ease;
+} 
