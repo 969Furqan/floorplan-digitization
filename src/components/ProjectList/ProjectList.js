@@ -1,44 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import NewProjectDialog from '../NewProjectDialog/NewProjectDialog';
+import projectService from '../../services/projectService';
 import './ProjectList.css';
 
 const ProjectList = () => {
   const navigate = useNavigate();
-  const [projects] = useState([
-    {
-      id: 1,
-      filename: 'Office Building',
-      createdAt: '2024-03-15T10:30:00',
-      modifiedAt: '2024-03-16T14:20:00',
-      size: 2048576,
-      owner: 'John Doe',
-      status: 'In Progress'
-    },
-    {
-      id: 2,
-      filename: 'Apartment Complex',
-      createdAt: '2024-03-14T09:15:00',
-      modifiedAt: '2024-03-14T16:45:00',
-      size: 1048576,
-      owner: 'John Doe',
-      status: 'Completed'
+  const [showNewProjectDialog, setShowNewProjectDialog] = useState(false);
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    loadProjects();
+  }, []);
+
+  const loadProjects = async () => {
+    try {
+      const projectList = await projectService.getAllProjects();
+      setProjects(projectList);
+    } catch (error) {
+      console.error('Failed to load projects:', error);
+      // You might want to show an error message to the user
     }
-  ]);
+  };
 
   const handleNewProject = () => {
-    // Navigate to canvas with a new project ID
-    const newProjectId = Date.now(); // Simple way to generate unique ID
-    navigate(`/canvas?project=${newProjectId}&new=true`);
+    setShowNewProjectDialog(true);
+  };
+
+  const handleNewProjectSubmit = async (filename) => {
+    try {
+      const newProject = await projectService.createProject(filename);
+      setShowNewProjectDialog(false);
+      // Navigate to canvas with the new project ID
+      navigate(`/canvas?project=${newProject.id}&new=true`);
+    } catch (error) {
+      console.error('Failed to create project:', error);
+      // You might want to show an error message to the user
+    }
   };
 
   const handleEditProject = (projectId) => {
-    // Navigate to canvas with existing project ID
     navigate(`/canvas?project=${projectId}`);
   };
 
-  const handleDeleteProject = (projectId) => {
-    // Add delete logic here
-    console.log('Delete project:', projectId);
+  const handleDeleteProject = async (projectId) => {
+    if (window.confirm('Are you sure you want to delete this project?')) {
+      try {
+        await projectService.deleteProject(projectId);
+        await loadProjects(); // Reload the projects list
+      } catch (error) {
+        console.error('Failed to delete project:', error);
+        // You might want to show an error message to the user
+      }
+    }
   };
 
   // Format date to local string
@@ -108,6 +122,13 @@ const ProjectList = () => {
           </div>
         ))}
       </div>
+
+      {showNewProjectDialog && (
+        <NewProjectDialog
+          onClose={() => setShowNewProjectDialog(false)}
+          onSubmit={handleNewProjectSubmit}
+        />
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { 
   Tldraw, 
@@ -13,6 +13,7 @@ import {
 } from '@tldraw/tldraw';
 import '@tldraw/tldraw/tldraw.css';
 import './Canvas.css';
+import projectService from '../../services/projectService';
 
 DefaultDashStyle.setDefaultValue('solid')
 LineShapeSplineStyle.setDefaultValue('line')
@@ -103,6 +104,32 @@ const Canvas = () => {
   const projectId = searchParams.get('project');
   const isNewProject = searchParams.get('new') === 'true';
 
+  const handleCanvasChange = useCallback(async (editor) => {
+    if (!projectId) return;
+    
+    try {
+      const canvasState = editor.getSnapshot();
+      await projectService.saveProjectCanvas(parseInt(projectId), canvasState);
+    } catch (error) {
+      console.error('Failed to save project:', error);
+      // You might want to show an error message to the user
+    }
+  }, [projectId]);
+
+  const loadProject = useCallback(async (editor) => {
+    if (!projectId || isNewProject) return;
+
+    try {
+      const project = await projectService.getProject(projectId);
+      if (project?.canvasState) {
+        editor.loadSnapshot(project.canvasState);
+      }
+    } catch (error) {
+      console.error('Failed to load project:', error);
+      // You might want to show an error message to the user
+    }
+  }, [projectId, isNewProject]);
+
   return (
     <div className="canvas-container">
       <Tldraw
@@ -113,15 +140,10 @@ const Canvas = () => {
         persistenceKey={`floorplan-${projectId}`}
         onMount={(editor) => {
           editor.updateInstanceState({ isGridMode: true });
-          
-          if (isNewProject) {
-            // Clear the canvas for new projects
-            editor.selectAll();
-            editor.deleteShapes(editor.getSelectedShapeIds());
-          } else {
-            // Load existing project data
-            // You'll need to implement this part to load the specific project
-          }
+          loadProject(editor);
+        }}
+        onChange={(editor) => {
+          handleCanvasChange(editor);
         }}
       />
     </div>
