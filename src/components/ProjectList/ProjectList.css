@@ -1,0 +1,127 @@
+.project-list-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.project-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.new-project-btn {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.new-project-btn:hover {
+  background-color: #1976d2;
+}
+
+.project-list-table {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  padding: 15px;
+  background-color: #f5f5f5;
+  font-weight: bold;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  align-items: center;
+}
+
+.table-row:hover {
+  background-color: #f8f9fa;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-badge.in-progress {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.status-badge.completed {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 8px;
+  transition: background-color 0.3s;
+}
+
+.action-btn.edit {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.action-btn.edit:hover {
+  background-color: #bbdefb;
+}
+
+.action-btn.delete {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+.action-btn.delete:hover {
+  background-color: #ffcdd2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .table-header,
+  .table-row {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .created,
+  .modified,
+  .owner,
+  .status {
+    display: none;
+  }
+}
+
+/* Add these styles to your existing CSS */
+.filename.clickable {
+  cursor: pointer;
+  color: #1976d2;
+  transition: color 0.3s;
+}
+
+.filename.clickable:hover {
+  color: #2196f3;
+  text-decoration: underline;
+} 

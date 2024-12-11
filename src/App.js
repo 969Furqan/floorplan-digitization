@@ -4,6 +4,7 @@ import NavBar from './components/NavBar/NavBar';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import Canvas from './components/Canvas/Canvas';
+import ProjectList from './components/ProjectList/ProjectList';
 import './App.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/canvas" element={<Canvas />} />
+            <Route path="/projects" element={<ProjectList />} />
             <Route path="/" element={<div>Home Page</div>} />
           </Routes>
         </main>

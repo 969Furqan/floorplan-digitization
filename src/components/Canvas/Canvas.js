@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { 
   Tldraw, 
   useEditor, 
@@ -98,6 +99,10 @@ function drawLine(ctx, x1, y1, x2, y2, width) {
 }
 
 const Canvas = () => {
+  const [searchParams] = useSearchParams();
+  const projectId = searchParams.get('project');
+  const isNewProject = searchParams.get('new') === 'true';
+
   return (
     <div className="canvas-container">
       <Tldraw
@@ -105,9 +110,18 @@ const Canvas = () => {
           Grid,
           Toolbar: CustomToolbar 
         }}
-        persistenceKey="example"
+        persistenceKey={`floorplan-${projectId}`}
         onMount={(editor) => {
           editor.updateInstanceState({ isGridMode: true });
+          
+          if (isNewProject) {
+            // Clear the canvas for new projects
+            editor.selectAll();
+            editor.deleteShapes(editor.getSelectedShapeIds());
+          } else {
+            // Load existing project data
+            // You'll need to implement this part to load the specific project
+          }
         }}
       />
     </div>

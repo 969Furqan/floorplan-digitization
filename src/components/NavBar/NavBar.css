@@ -48,9 +48,9 @@
 /* Vertical Navigation */
 .navbar-vertical {
   position: fixed;
-  top: 60px; /* Below top navbar */
-  left: -240px; /* Start hidden */
-  height: calc(100vh - 60px);
+  top: 60px; /* Keep this aligned with top navbar */
+  left: -240px;
+  height: calc(100vh - 60px); /* Subtract top navbar height */
   width: 240px;
   background-color: #333;
   transition: left 0.3s ease;
@@ -86,6 +86,6 @@
 
 /* Main content adjustment */
 body {
-  margin-top: 60px; /* Space for top navbar */
+  margin: 0; /* Remove the top margin from body */
   transition: margin-left 0.3s ease;
 } 
