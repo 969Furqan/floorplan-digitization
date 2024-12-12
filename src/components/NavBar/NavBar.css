@@ -21,6 +21,7 @@
   cursor: pointer;
   padding: 10px;
   transition: background-color 0.3s; /* Add transition for background color */
+  margin-top: 0px;
 }
 
 .hamburger-btn:hover {

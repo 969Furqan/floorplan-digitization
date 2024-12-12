@@ -38,7 +38,7 @@ const Account = () => {
       </div>
 
       <div className="horizontal-layout">
-        <section className="account-details">
+        <section className="account-details section">
           <h2>Change Account Details</h2>
           <label>
             Username:
@@ -61,7 +61,7 @@ const Account = () => {
           <button onClick={handleSaveDetails}>Save Changes</button>
         </section>
 
-        <section className="floorplan-preferences">
+        <section className="floorplan-preferences section">
           <h2>Floor Plan Preferences</h2>
           <p>What metric do you prefer for your floor plans?</p>
           <div className="radio-group">
@@ -97,7 +97,7 @@ const Account = () => {
         </section>
       </div>
 
-      <section className="more-functions">
+      <section className="more-functions section">
         <h2>More Functions</h2>
         <button onClick={() => alert('Functionality coming soon!')}>
           Additional Settings

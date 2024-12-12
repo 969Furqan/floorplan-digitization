@@ -31,9 +31,10 @@ h1 {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+
 }
 
-section {
+.section {
   flex: 1;
   margin-right: 20px;
   max-width: 400px;
