@@ -15,11 +15,26 @@
 }
 
 .hamburger-btn {
-  background: none;
+  background-color: white; /* Set background color to #333 */
   border: none;
   font-size: 24px;
   cursor: pointer;
   padding: 10px;
+  transition: background-color 0.3s; /* Add transition for background color */
+  margin-top: 0px;
+}
+
+.hamburger-btn:hover {
+  background-color: #333; /* Keep background color #333 on hover */
+}
+
+.hamburger-icon {
+  color: #333; /* Hamburger lines color */
+  transition: color 0.3s; /* Transition for hamburger lines color */
+}
+
+.hamburger-btn:hover .hamburger-icon {
+  color: white; /* Change hamburger lines color to #333 on hover */
 }
 
 .logo {

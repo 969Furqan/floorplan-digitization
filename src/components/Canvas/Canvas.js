@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useCallback } from 'react';
+import React, { useLayoutEffect, useRef, useCallback, useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { 
   Tldraw, 
@@ -9,7 +9,8 @@ import {
   LineShapeSplineStyle, 
   DefaultToolbar,
   TldrawUiMenuItem,
-  useTools
+  useTools,
+  exportAs
 } from '@tldraw/tldraw';
 import '@tldraw/tldraw/tldraw.css';
 import './Canvas.css';
@@ -103,6 +104,25 @@ const Canvas = () => {
   const [searchParams] = useSearchParams();
   const projectId = searchParams.get('project');
   const isNewProject = searchParams.get('new') === 'true';
+  const [projectName, setProjectName] = useState('');
+  const editorRef = useRef(null);
+
+  useEffect(() => {
+    const loadProjectDetails = async () => {
+      if (projectId) {
+        try {
+          const project = await projectService.getProject(projectId);
+          if (project) {
+            setProjectName(project.filename);
+          }
+        } catch (error) {
+          console.error('Failed to load project details:', error);
+        }
+      }
+    };
+
+    loadProjectDetails();
+  }, [projectId]);
 
   const handleCanvasChange = useCallback(async (editor) => {
     if (!projectId) return;
@@ -112,7 +132,6 @@ const Canvas = () => {
       await projectService.saveProjectCanvas(parseInt(projectId), canvasState);
     } catch (error) {
       console.error('Failed to save project:', error);
-      // You might want to show an error message to the user
     }
   }, [projectId]);
 
@@ -126,9 +145,34 @@ const Canvas = () => {
       }
     } catch (error) {
       console.error('Failed to load project:', error);
-      // You might want to show an error message to the user
     }
   }, [projectId, isNewProject]);
+
+  const handleMount = useCallback((editor) => {
+    editorRef.current = editor;
+    editor.updateInstanceState({ isGridMode: true });
+    loadProject(editor);
+
+    // Override the export methods
+    const originalExportImage = editor.exportImage;
+    editor.exportImage = async (format, options = {}) => {
+      const allShapeIds = editor.getCurrentPageShapeIds();
+      await exportAs(
+        editor,
+        allShapeIds,
+        format,
+        projectName || 'untitled',
+        {
+          ...options,
+          scale: 1,
+          background: true,
+          preserveAspectRatio: true
+        }
+      );
+      // Return null since we're handling the export directly
+      return null;
+    };
+  }, [loadProject, projectName]);
 
   return (
     <div className="canvas-container">
@@ -138,10 +182,7 @@ const Canvas = () => {
           Toolbar: CustomToolbar 
         }}
         persistenceKey={`floorplan-${projectId}`}
-        onMount={(editor) => {
-          editor.updateInstanceState({ isGridMode: true });
-          loadProject(editor);
-        }}
+        onMount={handleMount}
         onChange={(editor) => {
           handleCanvasChange(editor);
         }}

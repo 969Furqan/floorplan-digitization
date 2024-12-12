@@ -1,0 +1,48 @@
+.home {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f5f5f5;
+}
+
+.cta-buttons {
+  margin: 20px 0;
+}
+
+.cta-primary, .cta-secondary {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cta-primary {
+  background-color: #2196f3;
+  color: white;
+}
+
+.cta-secondary {
+  background-color: #e0e0e0;
+}
+
+.features, .how-it-works, .testimonials, .benefits {
+  padding: 40px 20px;
+  background-color: #fff;
+  margin: 20px 0;
+}
+
+.features h2, .how-it-works h2, .testimonials h2, .benefits h2 {
+  text-align: center;
+}
+
+.social-media {
+  margin-top: 10px;
+} 

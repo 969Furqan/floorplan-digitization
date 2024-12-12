@@ -1,5 +1,19 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 .main-content {
   transition: margin-left 0.3s ease;
   margin-top: 60px;
   min-height: calc(100vh - 60px);
+  padding: 0 20px;
+  overflow-x: hidden;
 }
+
