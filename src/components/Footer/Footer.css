@@ -1,0 +1,46 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  background-color: #333;
+  color: white;
+  text-align: left;
+}
+
+.footer-columns {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.footer-column {
+  flex: 0 1 400px; /* Adjusted to make columns less wide */
+  padding: 0 10px; /* Reduced padding for a tighter layout */
+  text-align: left;
+}
+
+.footer-column a {
+  color: white;
+  margin: 5px 0;
+  text-decoration: none;
+  display: block;
+  transition: color 0.3s;
+}
+
+.footer-column a:hover {
+  color: #2196f3;
+}
+
+.social-media a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.social-media a:hover {
+  color: #2196f3;
+} 
+
+.query-column > p {
+  margin: 5px 0px;
+}

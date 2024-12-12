@@ -1,0 +1,112 @@
+.account-container {
+  padding: 20px;
+  width: 100%;
+  height: calc(100vh - 60px);
+  margin: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: none;
+  overflow-y: auto;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-picture {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+h1 {
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.horizontal-layout {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+section {
+  flex: 1;
+  margin-right: 20px;
+  max-width: 400px;
+  padding: 0 15px;
+}
+
+section:last-child {
+  margin-right: 0;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #555;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="radio"],
+select {
+  width: calc(100% - 16px);
+  max-width: 100%;
+  padding: 8px;
+  margin-top: 2px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+select:focus {
+  border-color: #2196f3;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #1976d2;
+}
+
+.floorplan-preferences {
+  padding-top: 15px;
+}
+
+.more-functions {
+  text-align: center;
+  margin-top: 20px;
+}
