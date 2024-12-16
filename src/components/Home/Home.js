@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
-import DownArrowIcon from '../../assets/dropdown-arrow.svg';
+import { ReactComponent as DownArrowIcon } from '../../assets/dropdown-arrow.svg';
+import { ReactComponent as SearchIcon } from '../../assets/search-icon.svg';
 
 
 const Home = () => {
   const navigate = useNavigate();
   const [openDropdown, setOpenDropdown] = useState({});
   const dropdownRef = useRef(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const projects = [
     { id: 1, filename: 'Modern Apartment Renovation', modifiedAt: '2023-10-01' },
@@ -57,59 +59,39 @@ const Home = () => {
       <section className="hero">
         <h1>Transform Your Physical Floor Plans into Digital, Editable Masterpieces</h1>
         <p>Upload, digitize, and edit your floor plans effortlessly with our easy-to-use platform.</p>
-        {/* Visual Element (Image or Animation) */}
+        {/* Search Bar */}
+        <div className="search-bar">
+          <input 
+            type="text" 
+            placeholder="Search projects..." 
+            value={searchTerm} 
+            onChange={(e) => setSearchTerm(e.target.value)} 
+          />
+          <SearchIcon className="search-icon" />
+        </div>
       </section>
 
       {/* Card Layout Section */}
       <div className="card-layout">
-        {/* First Row */}
-        <div className="card wide-card">
-          <h2>Why Choose Our Platform?</h2>
-          <ul>
-            <li>Effortless Uploads: Support for JPEG and PNG formats with instant digitization.</li>
-            <li>Smart Editing Tools: Easily move, resize, add, or delete elements like walls, windows, and doors.</li>
-            <li>User-Friendly Interface: Intuitive design tailored for both beginners and professionals.</li>
-            <li>Fast and Accurate: Leverage cutting-edge image recognition to save time.</li>
-            <li>Tailored for Professionals and Homeowners: A solution for architects, designers, real estate agents, and homeowners.</li>
-          </ul>
-        </div>
-        <div className="card less-wide-card">
-          <h2>From Paper to Digital in 3 Simple Steps</h2>
-          <ol>
-            <li>Upload Your Floor Plan: Drag and drop your image, or select from your device.</li>
-            <li>Automatic Digitization: Watch as your floor plan is transformed into an editable format.</li>
-            <li>Edit and Save: Customize your plan and save your design with ease.</li>
-          </ol>
-        </div>
-
-        {/* Second Row */}
-        <div className="card less-wide-card">
-          <h2>Designed for Everyone</h2>
-            <p>Homeowners: Create the perfect layout for renovations or new builds.</p>
-            <p>Architects & Designers: Simplify your workflow with quick, editable conversions.</p>
-            <p>Real Estate Agents: Showcase properties with professionally digitized floor plans.</p>          
-        </div>
+        {/* Recent Projects */}
         <div className="card wide-card" id="recent-projects">
           <h2>Recent Projects</h2>
           <div className="project-list-table" ref={dropdownRef}>
             {projects.map((project) => (
-              <div key={project.id} className="table-row">
+              <div key={project.id} className="table-row" onClick={() => toggleDropdown(project.id)} >
                 <div 
                   className="filename clickable" 
                   onClick={() => handleProjectClick(project.id)}
                 >
                   {project.filename}
                 </div>
-                <div className="modified">Last Modified: {project.modifiedAt}</div>
+                <div className="modified">last modified: {project.modifiedAt}</div>
                 <div className="actions">
                   <div className="dropdown">
-                    <span 
+                    <DownArrowIcon 
                       className="dropdown-toggle" 
-                      onClick={() => toggleDropdown(project.id)}
-                    >
-                      <img src={DownArrowIcon} alt="Down Arrow" />
-                    </span>
-                    {openDropdown[project.id] && (
+                    />
+                    {openDropdown[project.id] && ( // Show dropdown if open
                       <div className="dropdown-menu">
                         <span 
                           className="dropdown-item"
@@ -130,12 +112,6 @@ const Home = () => {
               </div>
             ))}
           </div>
-        </div>
-        <div className="card wide-card">
-        <h2>See What Our Users Say</h2>
-          <blockquote>
-            "This platform saved me hours of work! The digitization process is seamless." - Homeowner
-          </blockquote>
         </div>
       </div>
     </div>

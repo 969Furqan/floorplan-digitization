@@ -41,7 +41,7 @@ const NavBar = () => {
         >
           <span className="hamburger-icon">☰</span>
         </button>
-        <div className="logo">Floorplan App</div>
+        <div className="logo"><Link to="/">Floorplan Digitization</Link></div>
         <div className="auth-links">
           <Link to="/login" className="sign-in-btn">Sign In</Link>
         </div>
@@ -54,8 +54,6 @@ const NavBar = () => {
         <ul className="nav-links-vertical">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/projects">Projects</Link></li>
-          <li><Link to="/account">Account</Link></li>
-          <li><Link to="/help">Help</Link></li>
           <li><Link to="/canvas">Canvas</Link></li>
         </ul>
       </nav>

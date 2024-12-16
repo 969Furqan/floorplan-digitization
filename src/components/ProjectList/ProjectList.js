@@ -55,9 +55,21 @@ const ProjectList = () => {
     }
   };
 
-  // Format date to local string
+  const handleExportProject = (projectId) => {
+    const project = projects.find(p => p.id === projectId);
+    const dataStr = JSON.stringify(project, null, 2);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${project.filename}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // Format date to local string (only return date)
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleString();
+    return new Date(dateString).toLocaleDateString();
   };
 
   // Format file size to human readable format
@@ -71,7 +83,7 @@ const ProjectList = () => {
   return (
     <div className="project-list-container">
       <div className="project-list-header">
-        <h1>My Projects</h1>
+        <h1>Projects</h1>
         <button className="new-project-btn" onClick={handleNewProject}>
           New Project
         </button>
@@ -84,12 +96,11 @@ const ProjectList = () => {
           <div className="modified">Modified</div>
           <div className="size">Size</div>
           <div className="owner">Owner</div>
-          <div className="status">Status</div>
           <div className="actions">Actions</div>
         </div>
         
         {projects.map((project) => (
-          <div key={project.id} className="table-row">
+          <div key={project.id} className="table-row" id="project-list-row">
             <div 
               className="filename clickable" 
               onClick={() => handleEditProject(project.id)}
@@ -100,11 +111,6 @@ const ProjectList = () => {
             <div className="modified">{formatDate(project.modifiedAt)}</div>
             <div className="size">{formatFileSize(project.size)}</div>
             <div className="owner">{project.owner}</div>
-            <div className="status">
-              <span className={`status-badge ${project.status.toLowerCase().replace(' ', '-')}`}>
-                {project.status}
-              </span>
-            </div>
             <div className="actions">
               <button 
                 className="action-btn edit"
@@ -117,6 +123,12 @@ const ProjectList = () => {
                 onClick={() => handleDeleteProject(project.id)}
               >
                 Delete
+              </button>
+              <button 
+                className="action-btn export"
+                onClick={() => handleExportProject(project.id)}
+              >
+                Export
               </button>
             </div>
           </div>
