@@ -1,0 +1,36 @@
+.api-testing-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.api-testing-container h1 {
+  margin-bottom: 20px;
+}
+
+.api-testing-container button {
+  padding: 10px 20px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.api-testing-container button:hover {
+  background-color: #1976d2;
+}
+
+.api-testing-container pre {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.error {
+  color: #d32f2f;
+  margin-top: 20px;
+}

@@ -8,6 +8,7 @@ import ProjectList from './components/ProjectList/ProjectList';
 import Account from './components/Account/Account';
 import Home from './components/Home/Home';
 import Footer from './components/Footer/Footer';
+import ApiTesting from './components/ApiTesting/Testing';
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/canvas" element={<Canvas />} />
             <Route path="/projects" element={<ProjectList />} />
             <Route path="/account" element={<Account />} />
+            <Route path="/api-testing" element={<ApiTesting />} />
           </Routes>
         </main>
         {/* Footer Component */}

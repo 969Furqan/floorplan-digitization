@@ -43,7 +43,7 @@ const NavBar = () => {
         </button>
         <div className="logo"><Link to="/">Floorplan Digitization</Link></div>
         <div className="auth-links">
-          <Link to="/login" className="sign-in-btn">Sign In</Link>
+          {/*<Link to="/login" className="sign-in-btn">Sign In</Link>*/}
         </div>
       </nav>
 
@@ -55,6 +55,7 @@ const NavBar = () => {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/projects">Projects</Link></li>
           <li><Link to="/canvas">Canvas</Link></li>
+          <li><Link to="/api-testing">API Testing</Link></li>
         </ul>
       </nav>
     </>
